@@ -9,13 +9,20 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import firebase from "firebase";
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = () => {};
+
+  const bgImg = require("../assets/background2.png");
+  const appIcon = require("../assets/appIcon.png");
+  const appName = require("../assets/appName.png");
+  const handleLogin = () => {
+    console.log("inside handleLogin ");
+  };
   return (
     <ImageBackground source={bgImg} style={styles.bgImage}>
       <View style={styles.upperContainer}>
@@ -82,6 +89,7 @@ const styles = StyleSheet.create({
   },
   lowerContainer: {
     flex: 0.5,
+    marginTop: 40,
     alignItems: "center",
   },
   textinput: {
