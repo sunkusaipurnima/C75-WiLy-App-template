@@ -1,10 +1,21 @@
 /** @format */
 
-import React from "react";
-import { ImageBackground } from "react-native";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import firebase from "firebase";
 
 const LoginScreen = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = () => {};
   return (
     <ImageBackground source={bgImg} style={styles.bgImage}>
       <View style={styles.upperContainer}>
@@ -15,14 +26,18 @@ const LoginScreen = (props) => {
       <View style={styles.lowerContainer}>
         <TextInput
           style={styles.textinput}
-          onChangeText={(text) => this.setState({ email: text })}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
           placeholder={"Enter Email"}
           placeholderTextColor={"#FFFFFF"}
           autoFocus
         />
         <TextInput
           style={[styles.textinput, { marginTop: 20 }]}
-          onChangeText={(text) => this.setState({ password: text })}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
           placeholder={"Enter Password"}
           placeholderTextColor={"#FFFFFF"}
           secureTextEntry
