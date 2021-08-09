@@ -15,32 +15,14 @@ import {
 import firebase from "firebase";
 import db from "../config";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const bgImg = require("../assets/background2.png");
   const appIcon = require("../assets/appIcon.png");
   const appName = require("../assets/appName.png");
-  const handleLogin = async () => {
-    console.log("inside handleLogin ");
-    if (!email) {
-      Alert.alert("Email is required");
-    }
-    if (!password) {
-      Alert.alert("Password is requied");
-    }
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        navigation.navigate("BottomTab");
-      })
-      .catch((error) => {
-        Alert.alert(error.message);
-      });
-  };
+  
   return (
     <ImageBackground source={bgImg} style={styles.bgImage}>
       <View style={styles.upperContainer}>
@@ -69,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
         />
         <TouchableOpacity
           style={[styles.button, { marginTop: 20 }]}
-          onPress={() => handleLogin(email, password)}
+          onPress={}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
