@@ -15,9 +15,7 @@ import db from "../config";
 const SearchScreen = (props) => {
   const [allTransactions, setAllTransactions] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchTransactions, setSearchTransactions] = useState([]);
-  const [lastTransaction, setLastTransaction] = useState(null);
-
+  
   console.log("all transactions", allTransactions);
 
   useEffect(() => {
@@ -25,65 +23,7 @@ const SearchScreen = (props) => {
     getAllTransactions();
   }, []);
 
-  const getAllTransactions = async () => {
-    var transactions = [];
-    db.collection("transactions")
-      .limit(10)
-      .orderBy("date", "desc")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          transactions.push(doc.data());
-          setAllTransactions(transactions);
-          setLastTransaction(doc);
-          console.log("transactions", transactions);
-          console.log("document", doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("error while getting transactions", error);
-      });
-  };
-
-  const fetchMoreTransactions = async () => {
-    var transactions = allTransactions;
-    db.collection("transactions")
-      .startAfter(lastTransaction)
-      .limit(2)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          transactions.push(doc.data());
-          setAllTransactions(transactions);
-          setLastTransaction(doc);
-        });
-      })
-      .catch((error) => {
-        console.log("error while getting additional transactions", error);
-      });
-  };
-
-  const handleSearch = () => {
-    setAllTransactions("");
-    console.log("inside Handle search");
-    var transactions = [];
-    db.collection("transactions")
-      .where("book_name", "==", searchText)
-
-      .limit(10)
-      .orderBy("date", "desc")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          transactions.push(doc.data());
-          setAllTransactions(transactions);
-        });
-      })
-      .catch((error) => {
-        console.log("error while getting transactions for the book", error);
-      });
-  };
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
